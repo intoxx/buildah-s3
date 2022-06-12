@@ -17,4 +17,5 @@ It doesn't replace the need for a container registry but for simple projects it 
 # Usage
 ```sh
 S3_BUCKET=<bucket> S3_REGION=<region> S3_ENDPOINT=<endpoint> S3_KEY=<key> S3_SECRET=<secret> push <image:tag>
+S3_BUCKET=<bucket> S3_REGION=<region> S3_ENDPOINT=<endpoint> S3_KEY=<key> S3_SECRET=<secret> pull <image:tag>
 ```
