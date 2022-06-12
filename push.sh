@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 #
 # Push local container images to a remote s3 bucket as a tar archive.
-# Dependencies: buildah, podman
+# Dependencies: buildah, podman.
 # Author: lucas.pruvost@pm.me.
 # Repository: https://github.com/intoxx/buildah-s3.
 # License: MIT.
@@ -63,6 +63,7 @@ init $@
 
 # Archive the image
 DIR=`cat /proc/sys/kernel/random/uuid`
+IMAGE=$1
 IMAGE_NAME=${1%%:*} # return image from image:tag in $1
 IMAGE_TAG=${1##*:} && ([ "$IMAGE_TAG" = "$IMAGE_NAME" ] || [ -z "$IMAGE_TAG" ]) && IMAGE_TAG=latest # same but for tag, defaulting to "latest" in case of wrong value
 IMAGE_BASENAME="$IMAGE_NAME/$IMAGE_TAG"
@@ -71,7 +72,7 @@ IMAGE_DIGEST="$IMAGE_BASENAME.tar.digest"
 
 # TODO: add support to change compression through --compression-format and --compression-level arguments
 mkdir -p "$DIR/$IMAGE_NAME"
-buildah push --digestfile="$DIR/$IMAGE_DIGEST" $IMAGE_NAME oci-archive:"$DIR/$IMAGE_PATH":$IMAGE_NAME
+buildah push --digestfile="$DIR/$IMAGE_DIGEST" $IMAGE oci-archive:"$DIR/$IMAGE_PATH":$IMAGE
 
 [ "$?" -ne "0" ] && err "impossible to create archive"
 
