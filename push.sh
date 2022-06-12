@@ -28,7 +28,7 @@ check_cmd() {
 }
 
 usage() {
-	echo "Usage: S3_BUCKET=<bucket> S3_KEY=<key> S3_SECRET=<secret> push <image>"
+	echo "Usage: S3_BUCKET=<bucket> S3_REGION=<region> S3_ENDPOINT=<endpoint> S3_KEY=<key> S3_SECRET=<secret> push <image:tag>"
 }
 
 # Arguments and dependencies checks.
